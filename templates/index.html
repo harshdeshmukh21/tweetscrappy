@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter Scraper</title>
+  </head>
+
+  <body>
+    <form method="POST" action="/scrape">
+      <button type="submit">Scrape Twitter</button>
+    </form>
+    <div>
+      <p>
+        These are the most happening topics as on {{ data['datetime']['$date']
+        }}:
+      </p>
+      <ul>
+        {% for key, value in data.items() %} {% if key.startswith('trend') %}
+        <li>{{ value.split('\n')[1] }}</li>
+        {% endif %} {% endfor %}
+      </ul>
+      <p>IP Address: {{ data['proxy_ip'] }}</p>
+      <p>Heres a JSON extract of this record from the MongoDB:</p>
+      <p.json>{{ data }}</p.json>
+    </div>
+  </body>
+</html>
